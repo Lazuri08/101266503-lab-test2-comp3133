@@ -1,0 +1,25 @@
+<form (ngSubmit)="onSubmit()">
+    <label for="year">Filter by Year:</label>
+    <input type="number" name="year" [(ngModel)]="filterYear">
+    <button type="submit">Search</button>
+</form>
+
+<div *ngIf="!launches.length">
+    <p>There was no launches in year {{ filterYear }}</p>
+</div>
+
+<div *ngFor="let launch of launches">
+    <div class="mission-card">
+        <img src="{{ launch.links.mission_patch_small }}" alt="{{ launch.mission_name }} mission patch">
+        <div class="mission-details">
+            <h2>{{ launch.mission_name }}</h2>
+            <p>Launch Year: {{ launch.launch_year }}</p>
+            <p>{{ launch.details }}</p>
+            <button mat-button style="border: 1px; background-color: aqua;" (click)="showMissionDetails(launch)">Details</button>
+        </div>
+        
+    </div>
+</div>
+
+
+

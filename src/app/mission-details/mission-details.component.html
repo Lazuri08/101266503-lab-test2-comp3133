@@ -1,0 +1,33 @@
+<mat-card>
+    <div>
+        <mat-card-title>{{ mission.mission_name }} (Flight Number: {{ mission.flight_number }})</mat-card-title>
+        <mat-card-subtitle>Launched on {{ mission.launch_date_utc | date: 'medium' }} (UTC)</mat-card-subtitle>
+    </div>
+    <mat-card-content>
+        <h1>Details</h1>
+        <div *ngIf="mission.links.mission_patch_small">
+            <img [src]="mission.links.mission_patch_small" alt="{{ mission.mission_name }} patch">
+        </div>
+        <div *ngIf="!mission.links.mission_patch_small">
+            <p>No mission patch available.</p>
+        </div>
+        <h1>Rocket:</h1>
+        <ul>
+            <li>ID: {{ mission.rocket.rocket_id }}</li>
+            <li>Type: {{ mission.rocket.rocket_type }}</li>
+        </ul>
+        <h1>Payload:</h1>
+        <ul>
+            <li>ID: {{ mission.rocket.second_stage.payloads[0].payload_id }}</li>
+            <li>Customers: {{ mission.rocket.second_stage.payloads[0].customers.join(', ') }}</li>
+            <li>Type: {{ mission.rocket.second_stage.payloads[0].payload_type }}</li>
+            <li>Mass: {{ mission.rocket.second_stage.payloads[0].payload_mass_kg }} kg</li>
+            <li>Orbit parameters: 
+                <ul>Orbit Name: {{ mission.rocket.second_stage.payloads[0].orbit }}</ul>
+                <ul>Reference System: {{ mission.rocket.second_stage.payloads[0].orbit_params.reference_system}} </ul>
+                <ul>Regime: {{ mission.rocket.second_stage.payloads[0].orbit_params.regime}} </ul>
+                <ul>Inclination Degree: {{ mission.rocket.second_stage.payloads[0].orbit_params.inclination_deg}} </ul>
+            </li>
+        </ul>
+    </mat-card-content>
+</mat-card>
